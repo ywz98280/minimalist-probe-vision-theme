@@ -1,8 +1,8 @@
 {
   "name": "Vision Probe",
   "short": "vision",
-  "description": "漫威电视剧《幻视任务 Vision Quest》主题的极简探针 v2：首页推倒重做为记忆任务线——左侧意识核心（三圈同心环 + 延迟轨道），右侧竖向任务线（记忆完整度排序 + 生命线 + 原地展开），不再有总览卡、地图与节点卡网格",
-  "version": "2.0.3",
+  "description": "白幻视醒来时失去了记忆，在寻找“我是谁”——每台服务器就是一块他要找回的记忆碎片，监控面板就是他重组身份的过程。",
+  "version": "2.0.4",
   "author": "vision-probe-theme",
   "url": "https://github.com/ywz98280/minimalist-probe-vision-theme",
   "config": [
