@@ -192,17 +192,19 @@ function handleRowKeydown(event: KeyboardEvent): void {
               <span class="quest-row__latency-task-name">{{ task.name }}</span>
               <button
                 type="button"
-                class="quest-row__latency-task-bars"
+                class="quest-row__latency-task-button"
                 :aria-label="`查看${task.name}延迟图`"
                 :title="`点击查看${task.name}延迟图`"
                 @click="openPingChart"
               >
-                <i
-                  v-for="bar in task.latencyBars"
-                  :key="bar.key"
-                  :class="bar.className"
-                  :title="bar.tooltip"
-                />
+                <span class="quest-row__latency-task-bars" role="img" :aria-label="`${task.name} 近 1 小时延迟走势，平均 ${task.latencyDisplay}`">
+                  <i
+                    v-for="bar in task.latencyBars"
+                    :key="bar.key"
+                    :class="bar.className"
+                    :title="bar.tooltip"
+                  />
+                </span>
               </button>
               <span class="quest-row__latency-task-value">{{ task.latencyDisplay }} / {{ task.lossDisplay }}</span>
             </li>
@@ -535,11 +537,11 @@ function handleRowKeydown(event: KeyboardEvent): void {
   white-space: nowrap;
 }
 
-.quest-row__latency-task-bars {
-  display: flex;
+/* 延迟小条外层按钮：只负责点击，不参与 flex 布局（部分浏览器对 button 做 flex 容器会丢子项样式）；
+   里面的 span 仍是原来的 flex 行，颜色渲染与 2.0.9 之前完全一致。 */
+.quest-row__latency-task-button {
+  display: block;
   flex: 1;
-  gap: 2px;
-  height: 0.6rem;
   min-width: 0;
   padding: 0;
   border: none;
@@ -548,14 +550,21 @@ function handleRowKeydown(event: KeyboardEvent): void {
   transition: opacity 150ms ease;
 }
 
-.quest-row__latency-task-bars:hover {
+.quest-row__latency-task-button:hover {
   opacity: 0.7;
 }
 
-.quest-row__latency-task-bars:focus-visible {
+.quest-row__latency-task-button:focus-visible {
   outline: 2px solid #e8b923;
   outline-offset: 3px;
   border-radius: 2px;
+}
+
+.quest-row__latency-task-bars {
+  display: flex;
+  gap: 2px;
+  height: 0.6rem;
+  min-width: 0;
 }
 
 .quest-row__latency-task-bars i {
