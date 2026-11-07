@@ -2,7 +2,7 @@
   "name": "Vision Probe",
   "short": "vision",
   "description": "白幻视拥有原版幻视的全部记忆，却感受不到它们是自己的——每台服务器都是一块记忆碎片，监控面板就是他重新连接它们的过程。",
-  "version": "2.2.3",
+  "version": "2.2.4",
   "author": "vision-probe-theme",
   "url": "https://github.com/ywz98280/minimalist-probe-vision-theme",
   "config": [
