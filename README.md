@@ -1,10 +1,6 @@
 # ⬡ 幻视探针 · Vision Probe
 
 > 一套给[极简探针 Monitor](https://github.com/monitor-probe/monitor) 用的漫威电视剧《幻视任务 Vision Quest》主题。白幻视醒来时失去了记忆，在寻找“我是谁”——每台服务器就是一块他要找回的记忆碎片，监控面板就是他重组身份的过程。
->
-> 以 [dongbo501/minimalist-probe-doraemon-theme](https://github.com/dongbo501/minimalist-probe-doraemon-theme) 为底层重构：同一套探针逻辑、同一套主题设置，只换了世界观、配色、文案和全部视觉素材。本主题的设计、文案与视觉均为原创，未抄袭任何其他主题。
->
-> **v2.0.0 说明：v1 只是换皮——配色文案换了，首页还是顶部总览卡 + 地图 + 节点卡网格的老结构。v2 把首页结构整个推倒重做，见下文「v2 首页：记忆任务线」。**
 
 <p align="center">
   <img src="preview.png" alt="白幻视模式首页示意" width="100%">
