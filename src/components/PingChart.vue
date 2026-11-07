@@ -21,6 +21,8 @@ import '@/utils/echarts' // 共享 ECharts 配置
 
 const props = defineProps<{
   uuid: string
+  /** 小窗模式：隐藏运营商统计卡片、图表更矮，用于任务线延迟小条点开的弹窗 */
+  compact?: boolean
 }>()
 
 const appStore = useAppStore()
@@ -828,9 +830,9 @@ onBeforeUnmount(() => {
       </div>
 
       <template v-else>
-        <!-- 最新值统计卡片（可点击切换选中状态） -->
+        <!-- 最新值统计卡片（可点击切换选中状态；小窗模式隐藏，弹窗里只看图） -->
         <div
-          v-if="latestValues.length > 0" class="gap-3 grid"
+          v-if="!props.compact && latestValues.length > 0" class="gap-3 grid"
           style="grid-template-columns: repeat(auto-fit, minmax(180px, 1fr))"
         >
           <div
@@ -955,7 +957,7 @@ onBeforeUnmount(() => {
         </div>
 
         <!-- 图表 -->
-        <div class="h-80 bg-background/50 p-4 rounded-md">
+        <div class="bg-background/50 p-4 rounded-md" :class="props.compact ? 'h-56' : 'h-80'">
           <VChart :option="pingChartOption" autoresize />
         </div>
       </template>

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { NodeData } from '@/stores/nodes'
-import { computed } from 'vue'
+import { computed, defineAsyncComponent, ref } from 'vue'
+import { AppDialog } from '@/components/ui/app-dialog'
 import { useNodePingDisplay } from '@/composables/useNodePingDisplay'
 import { useAppStore } from '@/stores/app'
 import { formatBytesPerSecondWithConfig, formatBytesWithConfig, getUptimeDays } from '@/utils/helper'
@@ -30,6 +31,15 @@ const emit = defineEmits<{
 }>()
 
 const appStore = useAppStore()
+
+/** 延迟图小窗：点延迟小条弹出该节点的三网延迟图（PingChart 小窗版），按需加载 */
+const PingChart = defineAsyncComponent(() => import('@/components/PingChart.vue'))
+const pingChartOpen = ref(false)
+const pingChartTitle = computed(() => `链路延迟 · ${props.node.name}`)
+
+function openPingChart(): void {
+  pingChartOpen.value = true
+}
 
 const stage = computed(() => getQuestStage(props.node, appStore.homeHighLoadThreshold))
 const completeness = computed(() => getMemoryCompleteness(props.node))
@@ -180,14 +190,20 @@ function handleRowKeydown(event: KeyboardEvent): void {
           <ul v-if="taskSummaries.length > 1" class="quest-row__latency-tasks">
             <li v-for="task in taskSummaries" :key="task.id">
               <span class="quest-row__latency-task-name">{{ task.name }}</span>
-              <span class="quest-row__latency-task-bars" role="img" :aria-label="`${task.name} 近 1 小时延迟走势，平均 ${task.latencyDisplay}`">
+              <button
+                type="button"
+                class="quest-row__latency-task-bars"
+                :aria-label="`查看${task.name}延迟图`"
+                :title="`点击查看${task.name}延迟图`"
+                @click="openPingChart"
+              >
                 <i
                   v-for="bar in task.latencyBars"
                   :key="bar.key"
                   :class="bar.className"
                   :title="bar.tooltip"
                 />
-              </span>
+              </button>
               <span class="quest-row__latency-task-value">{{ task.latencyDisplay }} / {{ task.lossDisplay }}</span>
             </li>
           </ul>
@@ -197,6 +213,16 @@ function handleRowKeydown(event: KeyboardEvent): void {
         进入详情 →
       </button>
     </div>
+
+    <!-- 延迟图小窗：点延迟小条弹出，比详情页的图小一号 -->
+    <AppDialog
+      v-model:open="pingChartOpen"
+      :title="pingChartTitle"
+      description="三网延迟走势，点击上方时间范围可切换"
+      content-class="max-w-3xl!"
+    >
+      <PingChart v-if="pingChartOpen" :uuid="node.uuid" compact />
+    </AppDialog>
   </li>
 </template>
 
@@ -515,6 +541,21 @@ function handleRowKeydown(event: KeyboardEvent): void {
   gap: 2px;
   height: 0.6rem;
   min-width: 0;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  transition: opacity 150ms ease;
+}
+
+.quest-row__latency-task-bars:hover {
+  opacity: 0.7;
+}
+
+.quest-row__latency-task-bars:focus-visible {
+  outline: 2px solid #e8b923;
+  outline-offset: 3px;
+  border-radius: 2px;
 }
 
 .quest-row__latency-task-bars i {
