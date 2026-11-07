@@ -9,11 +9,12 @@ import { Empty } from '@/components/ui/empty'
 import { Input } from '@/components/ui/input'
 import { useAppStore } from '@/stores/app'
 import { isNodeMatchSearch } from '@/utils/nodeSearch'
-import { countQuestFilter, getMemoryCompleteness, matchesQuestFilter, QUEST_FILTERS } from '@/utils/quest'
+import { countQuestFilter, matchesQuestFilter, QUEST_FILTERS } from '@/utils/quest'
 
 /**
  * 记忆任务线（Vision Probe v2 首页右栏）。
- * 一条竖着的金色脊线，每个节点是线上的一站，按记忆共鸣度从高到低排；
+ * 一条竖着的金色脊线，每个节点是线上的一站，按后台节点顺序排（weight 升序），
+ * 顺序固定，不随负载变；每站宝石上的数字仍是记忆共鸣度。
  * 顶部是任务阶段 pill tabs + 搜索框。点一行在原地展开，不跳页。
  */
 const props = defineProps<{
@@ -53,15 +54,12 @@ const filterCounts = computed(() => {
   return counts
 })
 
-/** 按记忆共鸣度从高到低排；共鸣度相同按名字稳排，离线（0%）自然沉底。 */
-const sortedNodes = computed(() => {
-  return [...props.nodes].sort((a, b) => {
-    const diff = getMemoryCompleteness(b) - getMemoryCompleteness(a)
-    if (diff !== 0)
-      return diff
-    return a.name.localeCompare(b.name, 'zh-CN')
-  })
-})
+/**
+ * 按后台节点顺序排：nodes 进来时已按 weight 升序排好（就是后台节点列表的顺序），
+ * 这里不再按记忆共鸣度重排——共鸣度随 CPU / 内存波动，重排会让顺序变来变去。
+ * 共鸣度只作为每站宝石上的数字展示。
+ */
+const sortedNodes = computed(() => [...props.nodes])
 
 const visibleNodes = computed(() => {
   const query = debouncedSearchText.value.trim()
@@ -124,7 +122,7 @@ const emptyDescription = computed(() => {
     </div>
 
     <p class="quest-timeline__caption">
-      按记忆共鸣度从高到低排 · 共鸣度 = 100 − (幻视核心转速 + 记忆矩阵) ÷ 2 · 点一行在原地展开
+      按后台节点顺序排 · 宝石数字是记忆共鸣度 · 点一行在原地展开
     </p>
 
     <ol v-if="visibleNodes.length > 0" class="quest-timeline__spine">
