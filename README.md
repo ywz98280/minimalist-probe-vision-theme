@@ -81,7 +81,7 @@ v2 首页不再有顶部总览卡、世界地图和节点卡网格，整个首�
 
 ## 📦 安装
 
-> ⚠️ 本仓库尚未创建：`theme.json` 的 `url` 目前留空，`package.json` 也未填写仓库地址。请先按文末步骤新建仓库并推送，之后再从 Releases 下载。
+> 从 Releases 下载 `theme.tar.gz`，面板上的「从 GitHub 更新」也会从最新 release 下载。
 
 1. 从 Releases 下载 `theme.tar.gz`，或者按下文自行构建。
 2. 两种方式任选其一：
