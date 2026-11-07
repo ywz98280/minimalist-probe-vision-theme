@@ -112,7 +112,7 @@ function handleRowKeydown(event: KeyboardEvent): void {
       role="button"
       tabindex="0"
       :aria-expanded="expanded"
-      :aria-label="`${node.name}，记忆完整度 ${completeness}%，${QUEST_STAGE_LABEL[stage]}，链路延迟 ${latencyChipText}，点一下${expanded ? '收起' : '展开'}详情`"
+      :aria-label="`${node.name}，记忆共鸣度 ${completeness}%，${QUEST_STAGE_LABEL[stage]}，链路延迟 ${latencyChipText}，点一下${expanded ? '收起' : '展开'}详情`"
       @click="emit('toggle')"
       @keydown="handleRowKeydown"
     >

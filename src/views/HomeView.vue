@@ -112,7 +112,7 @@ const briefing = computed(() => {
   const formattedValue = financeHelper.formatFinanceAmount(remainingValue, 'CNY')
   return {
     text: `幻视苏醒 ${online}/${total}`,
-    completeness: `记忆完整度 ${avgCompleteness}%`,
+    completeness: `记忆共鸣度 ${avgCompleteness}%`,
     energy: showPrice ? `宝石能量 ${formattedValue.symbol}${formattedValue.value}` : '宝石能量 ···',
     speed: `实时 ↑ ${formattedUp.value} ${formattedUp.unit} · ↓ ${formattedDown.value} ${formattedDown.unit}`,
   }

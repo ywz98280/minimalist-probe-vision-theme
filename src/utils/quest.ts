@@ -6,7 +6,7 @@ import { getDiskPercentage, getMemoryPercentage, isExpiringNode, isHighLoadNode 
  *
  * v2 推倒了 v1 的首页结构：不再有顶部总览卡、世界地图与节点卡网格，
  * 首页改成左侧「意识核心」+ 右侧「记忆任务线」。每个节点是任务线上的一站，
- * 按记忆完整度从高到低排，离线节点完整度为 0，自然沉底。
+ * 按记忆共鸣度从高到低排，离线节点共鸣度为 0，自然沉底。
  */
 
 /** 任务线上的一站处于哪个阶段 */
@@ -24,7 +24,7 @@ export const QUEST_FILTERS: Array<{ key: QuestFilter, label: string }> = [
 ]
 
 /**
- * 记忆完整度：在线节点 = round(100 - (CPU% + 内存%) / 2)，离线节点 = 0。
+ * 记忆共鸣度：在线节点 = round(100 - (CPU% + 内存%) / 2)，离线节点 = 0。
  * CPU、内存越空闲，记忆越完整；离线即记忆完全断线。
  */
 export function getMemoryCompleteness(node: NodeData): number {
@@ -40,7 +40,7 @@ export function getMemoryCompleteness(node: NodeData): number {
  * 一站的状态动词。
  * - 记忆断线：离线。
  * - 宝石过载：CPU / 内存 / 磁盘任一达到宝石过载阈值（默认 80%）。
- * - 重组中：在线、未过载，但 CPU 或内存已到阈值的 75%（默认 60%），正在高强度重组记忆。
+ * - 重组中：在线、未过载，但 CPU 或内存已到阈值的 75%（默认 60%），正在高强度连接记忆。
  *   注：直接按「CPU 或内存 ≥80%」会与宝石过载完全重合，所以重组中取阈值的 75% 作前兆线。
  * - 苏醒中：其余在线节点。
  */

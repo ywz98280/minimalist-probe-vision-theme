@@ -13,7 +13,7 @@ import { countQuestFilter, getMemoryCompleteness, matchesQuestFilter, QUEST_FILT
 
 /**
  * 记忆任务线（Vision Probe v2 首页右栏）。
- * 一条竖着的金色脊线，每个节点是线上的一站，按记忆完整度从高到低排；
+ * 一条竖着的金色脊线，每个节点是线上的一站，按记忆共鸣度从高到低排；
  * 顶部是任务阶段 pill tabs + 搜索框。点一行在原地展开，不跳页。
  */
 const props = defineProps<{
@@ -53,7 +53,7 @@ const filterCounts = computed(() => {
   return counts
 })
 
-/** 按记忆完整度从高到低排；完整度相同按名字稳排，离线（0%）自然沉底。 */
+/** 按记忆共鸣度从高到低排；共鸣度相同按名字稳排，离线（0%）自然沉底。 */
 const sortedNodes = computed(() => {
   return [...props.nodes].sort((a, b) => {
     const diff = getMemoryCompleteness(b) - getMemoryCompleteness(a)
@@ -124,7 +124,7 @@ const emptyDescription = computed(() => {
     </div>
 
     <p class="quest-timeline__caption">
-      按记忆完整度从高到低排 · 完整度 = 100 − (幻视核心转速 + 记忆矩阵) ÷ 2 · 点一行在原地展开
+      按记忆共鸣度从高到低排 · 共鸣度 = 100 − (幻视核心转速 + 记忆矩阵) ÷ 2 · 点一行在原地展开
     </p>
 
     <ol v-if="visibleNodes.length > 0" class="quest-timeline__spine">

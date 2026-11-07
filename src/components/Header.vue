@@ -82,7 +82,7 @@ const sitename = computed(() => appStore.publicSettings?.sitename || 'Monitor')
           type="button"
           data-vision-easter-trigger="memory"
           class="vision-brand__mark"
-          title="点一点心灵宝石，找回记忆碎片"
+          title="点一点心灵宝石，连接记忆碎片"
           aria-label="打开记忆矩阵彩蛋"
           @click.stop="revealPocketEasterEgg"
         >

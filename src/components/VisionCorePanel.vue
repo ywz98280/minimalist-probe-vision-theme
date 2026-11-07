@@ -163,7 +163,7 @@ onBeforeUnmount(() => {
     <div class="vision-core__panel">
       <header class="vision-core__heading">
         <h2>意识核心</h2>
-        <span>{{ onlineCount }} / {{ totalCount }} 件记忆碎片幻视苏醒 · 记忆完整度 {{ avgCompleteness }}%</span>
+        <span>{{ onlineCount }} / {{ totalCount }} 件记忆碎片幻视苏醒 · 记忆共鸣度 {{ avgCompleteness }}%</span>
       </header>
 
       <svg class="vision-core__svg" viewBox="0 0 360 360" role="img" aria-label="心灵宝石与三圈同心环：幻视核心转速、记忆矩阵、量子链路">

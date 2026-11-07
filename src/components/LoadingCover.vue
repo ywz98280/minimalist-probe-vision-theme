@@ -21,7 +21,7 @@ const hasCustomBackground = computed(() => appStore.backgroundEnabled && Boolean
         <span class="vision-stone-loader__ring vision-stone-loader__ring--inner" />
         <img class="vision-stone-loader__gem" src="/images/vision/mind-stone.svg" alt="" width="72" height="72">
       </span>
-      <span v-if="!hasCustomBackground" class="loading-cover__text">正在重组记忆…</span>
+      <span v-if="!hasCustomBackground" class="loading-cover__text">正在连接记忆…</span>
       <span v-else class="sr-only">加载中</span>
     </div>
   </div>
