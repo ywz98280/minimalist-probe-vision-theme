@@ -351,6 +351,7 @@ onUnmounted(() => {
 }
 
 .dark .vision-sky-pattern {
+  z-index: 1;
   opacity: 0.75;
   background-image:
     radial-gradient(circle at 18% 22%, #ffffff 0 1px, transparent 1.6px),
@@ -406,7 +407,10 @@ onUnmounted(() => {
 }
 
 .dark .vision-cloud {
-  opacity: 0.07;
+  /* 夜云：之前只有 0.07，夜里基本看不见；提到 0.3 变成柔和夜云。
+     小屋层在 DOM 里排在漂浮物之后会盖住它们，所以提到小屋之上。 */
+  z-index: 1;
+  opacity: 0.3;
   filter: none;
 }
 
@@ -429,11 +433,19 @@ onUnmounted(() => {
 }
 
 .dark .vision-flyer {
-  opacity: 0.55;
+  /* 宝石夜里要发光：提到 0.95，提到小屋之上，金色光晕 */
+  z-index: 1;
+  opacity: 0.95;
+}
+
+.dark .vision-flyer i {
+  filter: drop-shadow(0 0 14px rgb(242 201 76 / 0.6)) drop-shadow(0 6px 8px rgb(0 0 0 / 0.45));
 }
 
 /* 幻视脑海里的小屋：手绘客厅内景（窗、沙发、落地灯、发光的心灵宝石）。
-   只在深色模式出现，代替小镇剪影；顶部压一道深色渐变，保证任务线文字可读。 */
+   只在深色模式出现，代替小镇剪影；顶部压一道深色渐变，保证任务线文字可读。
+   注意：小屋层在 DOM 里排在云、宝石、六边形粒子之后，会盖住它们，
+   所以深色下的漂浮物要单独提 z-index（见下方 .dark 规则）。 */
 .vision-mind-house {
   position: absolute;
   inset: 0;
@@ -775,7 +787,10 @@ onUnmounted(() => {
   animation-delay: 8s;
 }
 .dark .vision-hex {
-  opacity: 0.6;
+  /* 金色六边形粒子夜里更亮，带一点金光，提到小屋之上 */
+  z-index: 1;
+  opacity: 0.9;
+  filter: drop-shadow(0 0 6px rgb(242 201 76 / 0.45));
 }
 @keyframes vision-hex-fall {
   0% {
