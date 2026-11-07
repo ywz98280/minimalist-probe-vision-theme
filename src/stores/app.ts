@@ -708,7 +708,7 @@ const useAppStore = defineStore('app', () => {
 
   const managedThemeMode = computed<ManagedThemeMode>(() => {
     const value = themeSettings.value.themeMode
-    return isValidManagedThemeMode(value) ? value : 'beijing'
+    return isValidManagedThemeMode(value) ? value : 'dark'
   })
 
   const isBeijingDaytime = computed<boolean>(() => {

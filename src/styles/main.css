@@ -760,6 +760,22 @@ header {
   letter-spacing: 0.06em;
 }
 
+/* 片头感：顶栏标题上方的剧名小字，宽字距大写，像片头字幕 */
+.vision-brand__copy em.vision-brand__eyebrow {
+  color: #b8860b;
+  font-family: var(--font-display);
+  font-size: 0.58rem;
+  font-style: normal;
+  font-weight: 800;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+}
+
+.dark .vision-brand__copy em.vision-brand__eyebrow {
+  color: #f2c94c;
+  text-shadow: 0 0 12px rgb(242 201 76 / 0.5);
+}
+
 .vision-brand__copy span b {
   color: var(--vision-red);
 }

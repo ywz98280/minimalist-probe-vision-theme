@@ -136,6 +136,9 @@ onUnmounted(() => {
       <div v-if="showDefaultBackground" class="default-background" aria-hidden="true">
         <div class="vision-sun" />
         <div class="vision-sky-pattern" />
+        <!-- 影视感：六边形穹顶（Hex 笼罩西景镇）与天光 -->
+        <div class="vision-hex-dome" />
+        <div class="vision-god-rays" />
         <span class="vision-cloud vision-cloud--1" />
         <span class="vision-cloud vision-cloud--2" />
         <span class="vision-cloud vision-cloud--3" />
@@ -222,8 +225,12 @@ onUnmounted(() => {
           <rect width="100%" height="100%" fill="url(#vision-town-tile)" />
         </svg>
 
-        <!-- 幻视脑海里的小屋：深色模式专用，见下方 .vision-mind-house -->
+        <!-- 幻视脑海里的宫殿：深色模式专用，见下方 .vision-mind-house -->
         <span class="vision-mind-house" aria-hidden="true" />
+
+        <!-- 影视感：暗角 + 胶片颗粒，罩在整个场景之上 -->
+        <div class="vision-vignette" />
+        <div class="vision-grain" />
       </div>
     </Transition>
     <Transition name="fade">
@@ -273,8 +280,10 @@ onUnmounted(() => {
   overflow: hidden;
   /* 白幻视：瓷白天空，地平线附近有一层心灵宝石金的暖光 */
   background:
-    radial-gradient(ellipse 80% 38% at 50% 100%, rgb(242 201 76 / 0.35), transparent 70%),
-    linear-gradient(180deg, #f7f8fa 0%, #f2f0e6 55%, #e9dfc0 100%);
+    radial-gradient(ellipse 80% 38% at 50% 100%, rgb(242 201 76 / 0.42), transparent 70%),
+    linear-gradient(180deg, #f7f8fa 0%, #f2f0e6 55%, #e6d5a8 100%);
+  /* 影视感：整个场景极慢地推近，像电影开场的缓慢推镜 */
+  animation: vision-kenburns 90s ease-in-out infinite alternate;
 }
 
 .dark .default-background {
@@ -315,24 +324,20 @@ onUnmounted(() => {
   animation: vision-sun-spin 120s linear infinite;
 }
 
-/* 金色宝石月：夜里换成左上角的一轮金色六边宝石月 */
+/* 金色宝石月：夜里换成左上角的一轮六边形心灵宝石，带着金光缓慢呼吸 */
 .dark .vision-sun {
   top: -4.5rem;
   left: -4.5rem;
   width: 15rem;
   height: 15rem;
+  clip-path: polygon(50% 0%, 93% 25%, 93% 75%, 50% 100%, 7% 75%, 7% 25%);
   background:
-    radial-gradient(circle at 58% 60%, rgb(214 170 40 / 0.4) 0 1.1rem, transparent 1.15rem),
-    radial-gradient(circle at 72% 44%, rgb(214 170 40 / 0.32) 0 0.7rem, transparent 0.75rem),
-    radial-gradient(circle at 46% 76%, rgb(214 170 40 / 0.3) 0 0.55rem, transparent 0.6rem),
-    radial-gradient(circle at 60% 60%, #fff6c2, #ffd700 68%, #f2c200);
-  box-shadow:
-    0 0 0 1.2rem rgb(255 215 0 / 0.07),
-    0 0 0 2.6rem rgb(255 215 0 / 0.04),
-    0 0 5rem rgb(255 215 0 / 0.3);
+    radial-gradient(circle at 50% 40%, rgb(255 255 255 / 0.9) 0 1.1rem, transparent 1.7rem),
+    linear-gradient(135deg, #fff6b0 0%, #f2c94c 45%, #d4a017 75%, #b8860b 100%);
+  filter: drop-shadow(0 0 2.5rem rgb(242 201 76 / 0.55)) drop-shadow(0 0 6rem rgb(242 201 76 / 0.25));
   mask-image: none;
   -webkit-mask-image: none;
-  animation: none;
+  animation: vision-stone-pulse 6s ease-in-out infinite;
 }
 
 /* 淡淡的六边形网格，呼应幻视的合成晶格 */
@@ -365,6 +370,42 @@ onUnmounted(() => {
     310px 290px,
     220px 270px;
   animation: vision-star-twinkle 6s ease-in-out infinite alternate;
+}
+
+/* 影视感：六边形穹顶——Hex 笼罩在西景镇上空的能量穹顶，顶部最亮、向地平线隐去 */
+.vision-hex-dome {
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='112' viewBox='0 0 96 112'%3E%3Cpath d='M48 4 L88 27 V85 L48 108 L8 85 V27 Z' fill='none' stroke='%23E8B923' stroke-width='1.4'/%3E%3C/svg%3E");
+  background-size: 96px 112px;
+  opacity: 0.06;
+  mask-image: linear-gradient(180deg, #000 0%, #000 42%, transparent 78%);
+  -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 42%, transparent 78%);
+  animation: vision-dome-pulse 9s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+.dark .vision-hex-dome {
+  opacity: 0.13;
+  animation-name: vision-dome-pulse-dark;
+}
+
+/* 影视感：天光——从左上宝石/太阳处洒下的光束，极慢地扫过天空 */
+.vision-god-rays {
+  position: absolute;
+  top: -42vmax;
+  left: -42vmax;
+  width: 84vmax;
+  height: 84vmax;
+  background: repeating-conic-gradient(from 0deg at 50% 50%, rgb(242 201 76 / 0.09) 0deg 4deg, transparent 4deg 15deg);
+  mask-image: radial-gradient(circle at 50% 50%, #000 0%, transparent 52%);
+  -webkit-mask-image: radial-gradient(circle at 50% 50%, #000 0%, transparent 52%);
+  animation: vision-rays-spin 180s linear infinite;
+  pointer-events: none;
+}
+
+.dark .vision-god-rays {
+  background: repeating-conic-gradient(from 0deg at 50% 50%, rgb(242 201 76 / 0.13) 0deg 4deg, transparent 4deg 15deg);
 }
 
 /* 漫画风白云 */
@@ -442,8 +483,12 @@ onUnmounted(() => {
   filter: drop-shadow(0 0 14px rgb(242 201 76 / 0.6)) drop-shadow(0 6px 8px rgb(0 0 0 / 0.45));
 }
 
-/* 幻视脑海里的小屋：手绘客厅内景（窗、沙发、落地灯、发光的心灵宝石）。
+/* 幻视脑海里的宫殿：手绘暗色房间（木纹墙面、画框、扶手椅上的幻视与身后的身影、光束）。
    只在深色模式出现，代替小镇剪影；顶部压一道深色渐变，保证任务线文字可读。
+   宫殿图本身已带暗角，叠加渐变比小屋那版调轻，免得把人物压没。
+   但人物（尤其是白脸和白报纸）在半透明节点卡后面会抢视线，所以再叠一层
+   暗色遮罩（中间 0.45，专压人物那片区域）+ 3px 轻微模糊，让整幅画退成柔和的
+   氛围背景；模糊会吃掉元素边缘，所以 inset 往外扩 10px 兜住。
    注意：小屋层在 DOM 里排在云、宝石、六边形粒子之后，会盖住它们，
    所以深色下的漂浮物要单独提 z-index（见下方 .dark 规则）。 */
 .vision-mind-house {
@@ -455,13 +500,44 @@ onUnmounted(() => {
 
 .dark .vision-mind-house {
   display: block;
+  inset: -10px;
+  filter: blur(3px);
   background:
-    linear-gradient(180deg, rgb(10 14 26 / 0.8) 0%, rgb(10 14 26 / 0.42) 42%, rgb(10 14 26 / 0.68) 100%),
-    url('/images/vision/mind-house.svg') center 72% / cover no-repeat;
+    linear-gradient(180deg, rgb(10 14 26 / 0.65) 0%, rgb(10 14 26 / 0.45) 42%, rgb(10 14 26 / 0.6) 100%),
+    url('/images/vision/mind-palace.svg') center 50% / cover no-repeat;
 }
 
 .dark .vision-town {
   display: none;
+}
+
+/* 影视感：暗角——四边压暗，视线收向画面中心，像电影画幅 */
+.vision-vignette {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  background: radial-gradient(ellipse 92% 82% at 50% 46%, transparent 58%, rgb(26 35 50 / 0.16) 100%);
+  pointer-events: none;
+}
+
+.dark .vision-vignette {
+  background: radial-gradient(ellipse 92% 82% at 50% 46%, transparent 52%, rgb(0 0 0 / 0.42) 100%);
+}
+
+/* 影视感：胶片颗粒——整幅画面罩一层极淡的噪点，缓慢抖动 */
+.vision-grain {
+  position: absolute;
+  z-index: 2;
+  inset: -120px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+  background-size: 240px 240px;
+  opacity: 0.05;
+  animation: vision-grain-shift 1.1s steps(4) infinite;
+  pointer-events: none;
+}
+
+.dark .vision-grain {
+  opacity: 0.08;
 }
 
 /* 小镇天际线 */
@@ -641,6 +717,67 @@ onUnmounted(() => {
   }
 }
 
+@keyframes vision-kenburns {
+  from {
+    transform: scale(1) translate3d(0, 0, 0);
+  }
+  to {
+    transform: scale(1.045) translate3d(0, -0.5%, 0);
+  }
+}
+
+@keyframes vision-dome-pulse {
+  from {
+    opacity: 0.05;
+  }
+  to {
+    opacity: 0.1;
+  }
+}
+
+@keyframes vision-dome-pulse-dark {
+  from {
+    opacity: 0.1;
+  }
+  to {
+    opacity: 0.18;
+  }
+}
+
+@keyframes vision-rays-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes vision-stone-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.045);
+  }
+}
+
+@keyframes vision-grain-shift {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  25% {
+    transform: translate3d(-40px, 30px, 0);
+  }
+  50% {
+    transform: translate3d(30px, -45px, 0);
+  }
+  75% {
+    transform: translate3d(-25px, -20px, 0);
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
 @keyframes vision-star-twinkle {
   to {
     opacity: 0.45;
@@ -682,14 +819,21 @@ onUnmounted(() => {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .default-background,
   .vision-sun,
+  .dark .vision-sun,
   .vision-cloud,
   .vision-flyer,
   .vision-flyer i,
+  .vision-hex-dome,
+  .vision-god-rays,
   .dark .vision-sky-pattern {
     animation: none;
   }
   .vision-flyer {
+    display: none;
+  }
+  .vision-grain {
     display: none;
   }
 }

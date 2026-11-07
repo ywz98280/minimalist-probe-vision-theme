@@ -15,6 +15,10 @@ const hasCustomBackground = computed(() => appStore.backgroundEnabled && Boolean
     aria-live="polite"
   >
     <div class="loading-cover__indicator flex flex-col items-center gap-3">
+      <!-- 片头：剧名小字 + 大标题 + 金线，像剧集开场的标题卡 -->
+      <span class="loading-cover__eyebrow">Vision Quest · 幻视任务</span>
+      <span class="loading-cover__title">幻视·探针</span>
+      <span class="loading-cover__rule" aria-hidden="true" />
       <!-- 心灵宝石：金色六边宝石缓慢旋转，六边形光环逐块拼合 -->
       <span class="vision-stone-loader" :class="hasCustomBackground && 'vision-stone-loader--small'" aria-hidden="true">
         <span class="vision-stone-loader__ring" />
@@ -48,6 +52,42 @@ const hasCustomBackground = computed(() => appStore.backgroundEnabled && Boolean
   font-size: 0.9rem;
   font-weight: 700;
   letter-spacing: 0.08em;
+}
+
+/* 片头标题卡 */
+.loading-cover__eyebrow {
+  color: #b8860b;
+  font-family: var(--font-display);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.42em;
+  text-indent: 0.42em;
+  text-transform: uppercase;
+}
+
+:global(.dark .loading-cover__eyebrow) {
+  color: #f2c94c;
+  text-shadow: 0 0 16px rgb(242 201 76 / 0.5);
+}
+
+.loading-cover__title {
+  color: #1a2332;
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  line-height: 1.1;
+}
+
+:global(.dark .loading-cover__title) {
+  color: #f7f8fa;
+  text-shadow: 0 0 24px rgb(242 201 76 / 0.35);
+}
+
+.loading-cover__rule {
+  width: 9rem;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #e8b923, transparent);
 }
 
 :global(.dark .loading-cover__text) {

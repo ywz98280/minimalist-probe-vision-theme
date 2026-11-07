@@ -92,6 +92,7 @@ const sitename = computed(() => appStore.publicSettings?.sitename || 'Monitor')
           <h1 class="sr-only">
             {{ sitename }}
           </h1>
+          <em class="vision-brand__eyebrow">Vision Quest · 幻视任务</em>
           <span>幻视<b>·</b>探针</span>
           <small>{{ sitename }} · 幻视纪元记忆碎片监控站</small>
         </div>
