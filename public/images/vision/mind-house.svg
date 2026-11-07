@@ -1,0 +1,133 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-label="幻视脑海里的小屋客厅">
+  <defs>
+    <linearGradient id="mh-wall" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#121A2E"/>
+      <stop offset="1" stop-color="#0A0E1A"/>
+    </linearGradient>
+    <linearGradient id="mh-window" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFF6B0"/>
+      <stop offset="0.55" stop-color="#F2C94C"/>
+      <stop offset="1" stop-color="#B8860B"/>
+    </linearGradient>
+    <radialGradient id="mh-glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#F2C94C" stop-opacity="0.85"/>
+      <stop offset="0.6" stop-color="#E8B923" stop-opacity="0.25"/>
+      <stop offset="1" stop-color="#E8B923" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="mh-lamp" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFE9A8"/>
+      <stop offset="1" stop-color="#E8B923"/>
+    </linearGradient>
+    <pattern id="mh-circuit" width="120" height="120" patternUnits="userSpaceOnUse">
+      <path d="M10 10H60V60H110M60 60V110M10 90H50" fill="none" stroke="#E8B923" stroke-opacity="0.08" stroke-width="2"/>
+      <circle cx="10" cy="10" r="3" fill="#E8B923" fill-opacity="0.1"/>
+      <circle cx="110" cy="60" r="3" fill="#0E9A8B" fill-opacity="0.12"/>
+      <circle cx="60" cy="110" r="3" fill="#E8B923" fill-opacity="0.1"/>
+    </pattern>
+    <linearGradient id="mh-sofa" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1C2B47"/>
+      <stop offset="1" stop-color="#0E1728"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 墙面 + 电路纹墙纸 -->
+  <rect width="1600" height="900" fill="url(#mh-wall)"/>
+  <rect width="1600" height="700" fill="url(#mh-circuit)"/>
+  <!-- 踢脚线与地板 -->
+  <rect x="0" y="700" width="1600" height="200" fill="#070C16"/>
+  <rect x="0" y="694" width="1600" height="10" fill="#1C2B47"/>
+  <rect x="0" y="700" width="1600" height="6" fill="#E8B923" fill-opacity="0.14"/>
+
+  <!-- 地毯 -->
+  <ellipse cx="820" cy="800" rx="560" ry="62" fill="#121A2E"/>
+  <ellipse cx="820" cy="800" rx="560" ry="62" fill="none" stroke="#E8B923" stroke-opacity="0.35" stroke-width="3"/>
+  <ellipse cx="820" cy="800" rx="420" ry="44" fill="none" stroke="#E8B923" stroke-opacity="0.16" stroke-width="2"/>
+
+  <!-- 带金色六边形光的窗户 -->
+  <g>
+    <rect x="120" y="110" width="440" height="460" rx="10" fill="#0A0E1A" stroke="#2A3A58" stroke-width="6"/>
+    <rect x="140" y="130" width="400" height="420" rx="6" fill="url(#mh-window)"/>
+    <polygon points="340,180 430,232 430,336 340,388 250,336 250,232" fill="#FFFBE0" fill-opacity="0.55"/>
+    <polygon points="340,180 430,232 340,284 250,232" fill="#FFFFFF" fill-opacity="0.35"/>
+    <rect x="330" y="130" width="20" height="420" fill="#0A0E1A"/>
+    <rect x="140" y="270" width="400" height="20" fill="#0A0E1A"/>
+    <rect x="140" y="130" width="400" height="420" rx="6" fill="none" stroke="#F2C94C" stroke-opacity="0.5" stroke-width="2"/>
+    <circle cx="340" cy="550" r="180" fill="url(#mh-glow)"/>
+  </g>
+  <!-- 窗光洒在地板上 -->
+  <polygon points="180,700 520,700 660,880 60,880" fill="#F2C94C" fill-opacity="0.07"/>
+
+  <!-- 墙上空画框 -->
+  <g>
+    <rect x="1050" y="130" width="260" height="190" rx="6" fill="#0E1728" stroke="#E8B923" stroke-opacity="0.55" stroke-width="5"/>
+    <rect x="1072" y="152" width="216" height="146" rx="3" fill="#121A2E" stroke="#2A3A58" stroke-width="2"/>
+    <polygon points="1180,180 1236,212 1236,270 1180,302 1124,270 1124,212" fill="none" stroke="#E8B923" stroke-opacity="0.35" stroke-width="2"/>
+    <circle cx="1180" cy="241" r="10" fill="#E8B923" fill-opacity="0.3"/>
+  </g>
+  <!-- 小画框 -->
+  <rect x="1380" y="170" width="120" height="90" rx="5" fill="#0E1728" stroke="#2A3A58" stroke-width="4"/>
+  <rect x="1392" y="182" width="96" height="66" rx="3" fill="#121A2E"/>
+  <circle cx="1440" cy="215" r="16" fill="none" stroke="#0E9A8B" stroke-opacity="0.5" stroke-width="2"/>
+
+  <!-- 落地灯 -->
+  <g>
+    <circle cx="700" cy="330" r="150" fill="url(#mh-glow)"/>
+    <rect x="694" y="330" width="12" height="380" rx="6" fill="#2A3A58"/>
+    <ellipse cx="700" cy="716" rx="70" ry="12" fill="#1C2B47"/>
+    <path d="M650 330 L750 330 L730 250 L670 250 Z" fill="url(#mh-lamp)" stroke="#8A6508" stroke-width="2"/>
+    <rect x="688" y="238" width="24" height="16" rx="4" fill="#2A3A58"/>
+  </g>
+
+  <!-- 边桌 + 发光的心灵宝石 -->
+  <g>
+    <rect x="600" y="600" width="200" height="16" rx="4" fill="#1C2B47"/>
+    <rect x="612" y="616" width="14" height="96" fill="#2A3A58"/>
+    <rect x="774" y="616" width="14" height="96" fill="#2A3A58"/>
+    <rect x="612" y="660" width="176" height="10" rx="3" fill="#1C2B47"/>
+    <circle cx="700" cy="540" r="72" fill="url(#mh-glow)"/>
+    <polygon points="700,496 738,518 738,562 700,584 662,562 662,518" fill="#F2C94C" stroke="#8A6508" stroke-width="2.5" stroke-linejoin="round"/>
+    <polygon points="700,496 738,518 700,540 662,518" fill="#FFFFFF" fill-opacity="0.6"/>
+    <polygon points="700,540 738,518 738,562 700,584" fill="#E8B923" fill-opacity="0.5"/>
+    <circle cx="700" cy="540" r="6" fill="#FFFBE0"/>
+  </g>
+
+  <!-- 扶手椅 -->
+  <g>
+    <rect x="110" y="590" width="280" height="150" rx="18" fill="url(#mh-sofa)" stroke="#2A3A58" stroke-width="3"/>
+    <rect x="110" y="560" width="280" height="90" rx="18" fill="url(#mh-sofa)" stroke="#2A3A58" stroke-width="3"/>
+    <rect x="96" y="600" width="42" height="140" rx="14" fill="#16223A" stroke="#2A3A58" stroke-width="3"/>
+    <rect x="362" y="600" width="42" height="140" rx="14" fill="#16223A" stroke="#2A3A58" stroke-width="3"/>
+    <rect x="150" y="640" width="100" height="80" rx="10" fill="#0E9A8B" fill-opacity="0.22" stroke="#0E9A8B" stroke-opacity="0.4" stroke-width="2"/>
+    <rect x="262" y="640" width="100" height="80" rx="10" fill="#1C2B47"/>
+    <rect x="130" y="740" width="16" height="30" fill="#2A3A58"/>
+    <rect x="364" y="740" width="16" height="30" fill="#2A3A58"/>
+  </g>
+
+  <!-- 沙发 -->
+  <g>
+    <rect x="920" y="520" width="580" height="130" rx="20" fill="url(#mh-sofa)" stroke="#2A3A58" stroke-width="3"/>
+    <rect x="920" y="620" width="580" height="120" rx="18" fill="url(#mh-sofa)" stroke="#2A3A58" stroke-width="3"/>
+    <rect x="900" y="580" width="52" height="160" rx="16" fill="#16223A" stroke="#2A3A58" stroke-width="3"/>
+    <rect x="1468" y="580" width="52" height="160" rx="16" fill="#16223A" stroke="#2A3A58" stroke-width="3"/>
+    <rect x="970" y="620" width="150" height="96" rx="12" fill="#0E9A8B" fill-opacity="0.18" stroke="#0E9A8B" stroke-opacity="0.35" stroke-width="2"/>
+    <rect x="1140" y="620" width="150" height="96" rx="12" fill="#1C2B47"/>
+    <rect x="1310" y="620" width="150" height="96" rx="12" fill="#1C2B47"/>
+    <rect x="1330" y="560" width="110" height="70" rx="12" fill="#F2C94C" fill-opacity="0.2" stroke="#E8B923" stroke-opacity="0.45" stroke-width="2"/>
+    <rect x="940" y="740" width="16" height="28" fill="#2A3A58"/>
+    <rect x="1464" y="740" width="16" height="28" fill="#2A3A58"/>
+  </g>
+
+  <!-- 空中漂浮的六边形粒子 -->
+  <g fill="#F2C94C">
+    <polygon points="830,180 846,189 846,207 830,216 814,207 814,189" fill-opacity="0.55"/>
+    <polygon points="950,320 962,327 962,341 950,348 938,341 938,327" fill-opacity="0.35"/>
+    <polygon points="620,140 630,146 630,158 620,164 610,158 610,146" fill-opacity="0.45"/>
+    <polygon points="1520,420 1532,427 1532,441 1520,448 1508,441 1508,427" fill-opacity="0.4"/>
+    <polygon points="180,420 190,426 190,438 180,444 170,438 170,426" fill-opacity="0.3"/>
+    <polygon points="760,90 770,96 770,108 760,114 750,108 750,96" fill-opacity="0.35"/>
+  </g>
+  <g fill="#0E9A8B">
+    <polygon points="880,120 890,126 890,138 880,144 870,138 870,126" fill-opacity="0.4"/>
+    <polygon points="1330,380 1340,386 1340,398 1330,404 1320,398 1320,386" fill-opacity="0.35"/>
+  </g>
+</svg>

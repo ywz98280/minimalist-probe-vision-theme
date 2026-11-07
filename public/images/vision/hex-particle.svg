@@ -1,0 +1,4 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" role="img" aria-label="六边形粒子">
+  <polygon points="20,2 36,11 36,29 20,38 4,29 4,11" fill="#F2C94C" fill-opacity="0.85" stroke="#B8860B" stroke-width="1.6" stroke-linejoin="round"/>
+  <polygon points="20,10 29,15 29,25 20,30 11,25 11,15" fill="#FFF6B0" fill-opacity="0.9"/>
+</svg>

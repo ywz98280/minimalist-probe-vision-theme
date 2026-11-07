@@ -1,0 +1,443 @@
+{
+  "name": "Vision Probe",
+  "short": "vision",
+  "description": "漫威电视剧《幻视任务 Vision Quest》主题的极简探针 v2：首页推倒重做为记忆任务线——左侧意识核心（三圈同心环 + 延迟轨道），右侧竖向任务线（记忆完整度排序 + 生命线 + 原地展开），不再有总览卡、地图与节点卡网格",
+  "version": "2.0.3",
+  "author": "vision-probe-theme",
+  "url": "https://github.com/ywz98280/minimalist-probe-vision-theme",
+  "config": [
+    {
+      "type": "title",
+      "label": "01 · 幻视模式与基础连接"
+    },
+    {
+      "key": "themeMode",
+      "type": "select",
+      "label": "默认幻视模式",
+      "default": "dark",
+      "options": [
+        {
+          "value": "beijing",
+          "label": "按北京时间自动"
+        },
+        {
+          "value": "light",
+          "label": "白幻视模式"
+        },
+        {
+          "value": "dark",
+          "label": "虚空夜幕模式"
+        }
+      ],
+      "help": "beijing=北京时间 07:00-18:59 使用白幻视模式、其余时间使用虚空夜幕模式；light=白幻视模式；dark=虚空夜幕模式。前端右上角按钮可仅为当前浏览器临时切换。"
+    },
+    {
+      "key": "dataUpdateInterval",
+      "type": "number",
+      "label": "记忆碎片数据更新间隔",
+      "default": 3,
+      "min": 1,
+      "max": 60,
+      "help": "HTTP 轮询模式下节点实时数据的刷新间隔，单位：秒（1-60）。WebSocket 模式固定由 hub 每 2 秒推送。"
+    },
+    {
+      "key": "rpcTransportMode",
+      "type": "select",
+      "label": "量子链路数据连接方式",
+      "default": "http",
+      "options": [
+        {
+          "value": "http",
+          "label": "HTTP 轮询"
+        },
+        {
+          "value": "websocket",
+          "label": "WebSocket 实时推送"
+        }
+      ],
+      "help": "http=按下方间隔轮询 /api/nodes；websocket=使用 hub 的 /api/ws 每 2 秒推送（反向代理需放行 WebSocket）。"
+    },
+    {
+      "type": "title",
+      "label": "02 · 意识核心、记忆任务线与彩蛋"
+    },
+    {
+      "key": "alertEnabled",
+      "type": "boolean",
+      "label": "显示记忆册公告",
+      "default": false,
+      "help": "在首页节点区域上方显示自定义记忆册公告。"
+    },
+    {
+      "key": "alertTitle",
+      "type": "string",
+      "label": "记忆册公告标题",
+      "default": "",
+      "help": "记忆册公告的标题文字。"
+    },
+    {
+      "key": "alertContent",
+      "type": "text",
+      "label": "记忆册公告内容",
+      "default": "",
+      "help": "记忆册公告的正文，支持简单 Markdown 格式。"
+    },
+    {
+      "key": "hideVisionCore",
+      "type": "boolean",
+      "label": "隐藏意识核心",
+      "default": false,
+      "help": "隐藏首页左侧的意识核心（三圈同心环 + 延迟轨道），任务线会占满整行；移动端紧凑横条也会一起隐藏。"
+    },
+    {
+      "key": "questDensity",
+      "type": "select",
+      "label": "任务线密度",
+      "default": "compact",
+      "options": [
+        {
+          "value": "compact",
+          "label": "紧凑"
+        },
+        {
+          "value": "comfortable",
+          "label": "舒适"
+        }
+      ],
+      "help": "compact=任务线每一站更矮，一屏能看更多站；comfortable=每站更高、留白更多。"
+    },
+    {
+      "key": "visionMemoryLabelsEnabled",
+      "type": "boolean",
+      "label": "显示记忆碎片标签",
+      "default": true,
+      "help": "为每台服务器随机分配一件不重复的记忆碎片（西景镇、旺达、心灵宝石……），显示在任务线每一站的名字旁边；关闭后只显示节点原有标签。"
+    },
+    {
+      "key": "visitorInfoEnabled",
+      "type": "boolean",
+      "label": "显示来访西景镇居民信息",
+      "default": true,
+      "help": "开启后显示底部“西景镇来访”IP 状态条；宽屏左下角同时显示详情卡。访客 IP 由浏览器直接向第三方 IP 查询服务获取。访客称为“西景镇居民”，已登录站长称为“幻视”。"
+    },
+    {
+      "key": "glassColorPreset",
+      "type": "select",
+      "label": "卡片配色预设",
+      "default": "白幻视",
+      "options": [
+        {
+          "value": "翡翠",
+          "label": "翡翠"
+        },
+        {
+          "value": "柔和",
+          "label": "柔和"
+        },
+        {
+          "value": "高对比",
+          "label": "高对比"
+        },
+        {
+          "value": "白幻视",
+          "label": "白幻视（推荐）"
+        },
+        {
+          "value": "自定义",
+          "label": "自定义"
+        }
+      ],
+      "help": "控制白幻视与虚空夜幕两种模式的卡片透明度、文字和边框；当前主题推荐“白幻视”（白色卡片 + 墨色文字）。选择“自定义”后读取下方 JSON。"
+    },
+    {
+      "key": "colorVisionMode",
+      "type": "select",
+      "label": "色觉辅助配色",
+      "default": "标准",
+      "options": [
+        {
+          "value": "标准",
+          "label": "标准"
+        },
+        {
+          "value": "色觉友好",
+          "label": "色觉友好"
+        }
+      ],
+      "help": "色觉友好使用蓝、蓝绿、橙、朱红、紫红，并为图表和状态增加线型、纹理、文字或图标区分。"
+    },
+    {
+      "key": "glassCustomColors",
+      "type": "text",
+      "label": "自定义白幻视/虚空夜幕卡片 JSON",
+      "default": "{\"lightCard\": \"#ffffff\", \"lightControl\": \"#ffffff\", \"lightText\": \"#1a2332\", \"lightMutedText\": \"#5a6b7f\", \"lightBorder\": \"#ffffff\", \"darkCard\": \"#121a2ee6\", \"darkControl\": \"#121a2ed9\", \"darkText\": \"#f2f5f9\", \"darkMutedText\": \"#c9d4e0\", \"darkBorder\": \"#f2c94c40\"}",
+      "help": "light*=白幻视模式，dark*=虚空夜幕模式；Card=卡片，Control=控制条，Text=主文字，MutedText=次文字，Border=边框。支持 #RRGGBB 和带透明度的 #RRGGBBAA。"
+    },
+    {
+      "type": "title",
+      "label": "03 · 幻视工具箱与隐私"
+    },
+    {
+      "key": "homeToolsEnabled",
+      "type": "boolean",
+      "label": "登录后显示幻视工具箱",
+      "default": true,
+      "help": "站长登录后，在顶部幻视工具箱入口显示拓扑、性价比、健康和导出功能。"
+    },
+    {
+      "key": "hideAdminEntryWhenLoggedOut",
+      "type": "boolean",
+      "label": "隐藏后台入口",
+      "default": false,
+      "help": "未登录时隐藏顶部后台管理入口（/admin）。"
+    },
+    {
+      "key": "hidePriceWhenLoggedOut",
+      "type": "boolean",
+      "label": "未登录隐藏价格",
+      "default": false,
+      "help": "未登录时不在任务线展开区和详情页显示价格、剩余价值（只是不显示，接口仍会返回价格）；记忆碎片连续工作天数仍会显示。"
+    },
+    {
+      "key": "providerAliases",
+      "type": "string",
+      "label": "厂商自定义别名",
+      "default": "",
+      "help": "格式：Provider:alias1,alias2;Provider2:alias。"
+    },
+    {
+      "key": "disablePageAnimation",
+      "type": "boolean",
+      "label": "减弱过渡动画",
+      "default": false,
+      "help": "减少页面过渡动画效果，提升访问速度和响应性"
+    },
+    {
+      "type": "title",
+      "label": "04 · 记忆任务线与任务阶段"
+    },
+    {
+      "key": "homeHighLoadThreshold",
+      "type": "number",
+      "label": "宝石过载阈值",
+      "default": 80,
+      "min": 1,
+      "max": 100,
+      "help": "幻视核心转速（CPU）、记忆矩阵（内存）或振金档案库（磁盘）占用达到该百分比时，任务线上的状态动词变为“宝石过载”（1-100）；达到阈值 75% 时显示为“重组中”。"
+    },
+    {
+      "key": "homeTrafficWarningThreshold",
+      "type": "number",
+      "label": "量子链路流量预警阈值",
+      "default": 80,
+      "min": 1,
+      "max": 100,
+      "help": "量子链路流量配额使用率达到该百分比时归为流量预警（1-100）。"
+    },
+    {
+      "key": "homeExpiringDays",
+      "type": "number",
+      "label": "能量将尽天数",
+      "default": 30,
+      "min": 1,
+      "max": 3650,
+      "help": "记忆碎片能量余期小于等于该值时，任务线“能量将尽”筛选里会出现它（1-3650 天）。"
+    },
+    {
+      "key": "diskPredictionEnabled",
+      "type": "boolean",
+      "label": "启用磁盘耗尽预测",
+      "default": false,
+      "help": "基于负载历史里的磁盘用量趋势预测耗尽时间；样本少于 2 天或未增长时不显示"
+    },
+    {
+      "key": "diskPredictionThresholdDays",
+      "type": "number",
+      "label": "磁盘预测预警天数",
+      "default": 30,
+      "min": 1,
+      "max": 3650,
+      "help": "预计剩余天数小于等于该值时在详情负载图中显示提示（1-3650）"
+    },
+    {
+      "type": "title",
+      "label": "05 · 记忆碎片详情概览卡片"
+    },
+    {
+      "key": "nodeDetailSectionTabsEnabled",
+      "type": "boolean",
+      "label": "详情页分区标签页",
+      "default": false,
+      "help": "默认关闭，保持节点详情页纵向连续展示；开启后按概览、负载、延迟分区显示。"
+    },
+    {
+      "key": "detailMetricCardPreset",
+      "type": "select",
+      "label": "详情概览卡片方案",
+      "default": "财务",
+      "options": [
+        {
+          "value": "财务",
+          "label": "财务"
+        },
+        {
+          "value": "状态",
+          "label": "状态"
+        },
+        {
+          "value": "资源",
+          "label": "资源"
+        },
+        {
+          "value": "网络",
+          "label": "网络"
+        },
+        {
+          "value": "GPU",
+          "label": "GPU"
+        },
+        {
+          "value": "综合",
+          "label": "综合"
+        },
+        {
+          "value": "自定义",
+          "label": "自定义"
+        }
+      ],
+      "help": "宽屏每行 4 张，中屏 3 张，移动端 2 张。财务/状态/网络/GPU=8 张；资源=12 张；综合=16 张；自定义读取下方 keys。"
+    },
+    {
+      "key": "detailMetricCardKeys",
+      "type": "text",
+      "label": "自定义详情卡片 keys",
+      "default": "nodePrice\nmonthlyCost\nremainingTime\nremainingValue\ntotalTraffic\ntrafficQuota\nuptime\nconnections",
+      "help": "逗号、空格或换行分隔。 nodePrice=节点价格； monthlyCost=月均支出； remainingTime=剩余时间； remainingValue=剩余价值； cpuUsage=CPU使用率； memoryUsage=内存使用率； swapUsage=交换内存使用率； diskUsage=硬盘使用率； load=系统负载； processes=进程数； connections=连接数； uptime=运行时间； uploadSpeed=实时上行； downloadSpeed=实时下行； totalTraffic=本期流量； trafficQuota=流量配额。"
+    },
+    {
+      "type": "title",
+      "label": "06 · 记忆碎片详情监控图表"
+    },
+    {
+      "key": "chartDashboardPreset",
+      "type": "select",
+      "label": "详情负载图方案",
+      "default": "默认",
+      "options": [
+        {
+          "value": "默认",
+          "label": "默认"
+        },
+        {
+          "value": "精简",
+          "label": "精简"
+        },
+        {
+          "value": "资源",
+          "label": "资源"
+        },
+        {
+          "value": "网络",
+          "label": "网络"
+        },
+        {
+          "value": "GPU",
+          "label": "GPU"
+        },
+        {
+          "value": "延迟",
+          "label": "延迟"
+        },
+        {
+          "value": "运维",
+          "label": "运维"
+        },
+        {
+          "value": "完整",
+          "label": "完整"
+        },
+        {
+          "value": "自定义",
+          "label": "自定义"
+        }
+      ],
+      "help": "资源、网络、GPU、延迟和运维按指标族组合；完整覆盖官方 25 个指标。自定义读取下方 keys。"
+    },
+    {
+      "key": "chartDashboardTemplate",
+      "type": "text",
+      "label": "自定义详情图表 keys",
+      "default": "cpu\nmemory\ndisk\nnetwork\nconnections\nprocess",
+      "help": "逗号、空格或换行分隔。 cpu=CPU； memory=内存； disk=磁盘； network=实时上下行； connections=TCP/UDP（仅实时）； process=进程（仅实时）； ping=延迟； pingLoss=丢包。"
+    },
+    {
+      "type": "title",
+      "label": "07 · 白幻视/虚空夜幕自定义背景"
+    },
+    {
+      "key": "backgroundEnabled",
+      "type": "boolean",
+      "label": "启用自定义模式背景",
+      "default": false,
+      "help": "开启后使用下方地址替换主题内置的白幻视天空（白幻视）和虚空夜幕背景；每种模式可单独设置。"
+    },
+    {
+      "key": "backgroundType",
+      "type": "select",
+      "label": "自定义背景素材类型",
+      "default": "image",
+      "options": [
+        {
+          "value": "image",
+          "label": "图片"
+        },
+        {
+          "value": "video",
+          "label": "视频"
+        }
+      ],
+      "help": "image=静态背景图片；video=自动静音循环的背景视频。"
+    },
+    {
+      "key": "lightBackgroundUrl",
+      "type": "string",
+      "label": "白幻视模式背景地址",
+      "default": "",
+      "help": "留空使用内置白幻视背景。支持 HTTPS 地址或站内 / 路径。"
+    },
+    {
+      "key": "darkBackgroundUrl",
+      "type": "string",
+      "label": "虚空夜幕模式背景地址",
+      "default": "",
+      "help": "留空使用内置虚空夜幕背景。支持 HTTPS 地址或站内 / 路径。"
+    },
+    {
+      "key": "backgroundBlur",
+      "type": "number",
+      "label": "自定义背景模糊半径",
+      "default": 0,
+      "min": 0,
+      "max": 200,
+      "help": "对自定义背景素材应用高斯模糊，单位：px；0 表示不模糊。"
+    },
+    {
+      "key": "backgroundOverlay",
+      "type": "number",
+      "label": "自定义背景遮罩强度",
+      "default": 0,
+      "min": -100,
+      "max": 100,
+      "help": "范围 -100 到 100；0 不处理，正数叠加黑色遮罩，负数降低背景素材不透明度。"
+    },
+    {
+      "key": "moduleOpacity",
+      "type": "number",
+      "label": "模块不透明度",
+      "default": 100,
+      "min": 0,
+      "max": 100,
+      "help": "卡片、顶栏、筛选条、意识核心、任务线、来访西景镇居民等模块底色的不透明度，单位：%（0-100）。100=主题默认效果；数值越小模块越透明，越能透出自定义背景（内置背景同样生效）。只影响底色，文字、图标和边框不变；建议 40-80，过低会影响文字可读性。"
+    }
+  ]
+}
