@@ -612,8 +612,10 @@ function handleRowKeydown(event: KeyboardEvent): void {
     height: 2.2rem;
   }
 
+  /* 手机版：展开详情与名字列对齐（0.7rem 内边距 + 2.2rem 宝石 + 0.6rem 间距），
+     让文字落在金色脊线（left: 1.79rem）右侧，不再被线压住。 */
   .quest-row__details {
-    padding-left: 0.7rem;
+    padding-left: 3.5rem;
   }
 }
 
