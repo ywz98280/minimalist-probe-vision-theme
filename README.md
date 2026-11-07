@@ -150,7 +150,7 @@ src/components/Background.vue        白幻视 / 虚空夜幕背景（宝石日�
 src/utils/visionMemories.ts           节点记忆碎片标签分配（30 件记忆碎片）
 src/styles/main.css                   心灵金配色与六边形视觉语言
 public/images/vision/                 心灵宝石、幻视徽记、六边形粒子、电路线 SVG（均为手绘几何抽象）
-theme.json                            主题清单与站长设置声明（v2.0.9）
+theme.json                            主题清单与站长设置声明（v2.0.10）
 ```
 
 ## 🙏 致谢与许可
